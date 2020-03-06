@@ -4,19 +4,19 @@ import org.junit.Test;
 public class MoodAnalyzerTest {
     MoodAnalyzer mood=new MoodAnalyzer();
 
-    //TEST CASE TO CHECK VALID MOOD
+    //TEST CASE TO CHECK SAD MOOD
     @Test
     public void givenMessage_whenValid_thenReturn() {
-        String recentmood="I am in sad mood";
-        String reaction=mood.moodAnalyzer(recentmood);
+        MoodAnalyzer mood=new MoodAnalyzer("I am in sad mood");
+        String reaction=mood.moodAnalyzer();
         Assert.assertEquals("Sad", reaction);
     }
 
-    //TEST CASE TO CHECK INVALID MOOD
+    //TEST CASE TO CHECK HAPPY MOOD
     @Test
     public void givenMessage_whenInvalid_thenReturn() {
-        String recentmood="I am in any mood";
-        String reaction=mood.moodAnalyzer(recentmood);
+        MoodAnalyzer mood=new MoodAnalyzer("I am in happy mood");
+        String reaction=mood.moodAnalyzer();
         Assert.assertEquals("Happy", reaction);
     }
 }
