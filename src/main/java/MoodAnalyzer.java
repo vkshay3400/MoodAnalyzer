@@ -1,12 +1,9 @@
 public class MoodAnalyzer {
     //DECLARE VARIABLE
-    String mood;
     String message;
 
     //DEFAULT CONSTRUCTOR
-    MoodAnalyzer(){
-        message="";
-    }
+    MoodAnalyzer(){ }
 
     //PARAMETERISED CONSTRUCTOR
     MoodAnalyzer(String message){
@@ -19,13 +16,14 @@ public class MoodAnalyzer {
     }
 
     //METHOD TO CHECK MOOD
-    public String moodAnalyzer(){
-        if (message.contains("sad")){
-            mood="Sad";
+    public String moodAnalyzer() {
+        try {
+            if (message.contains("sad"))
+                return "Sad";
+            else
+                return "Happy";
+        } catch (NullPointerException e) {
+            return "Happy";
         }
-        else if (message.contains("happy")){
-            mood="Happy";
-        }
-        return mood;
     }
 }
