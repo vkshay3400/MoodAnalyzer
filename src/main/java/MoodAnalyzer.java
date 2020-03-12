@@ -3,7 +3,8 @@ public class MoodAnalyzer {
     String message;
 
     //DEFAULT CONSTRUCTOR
-    MoodAnalyzer(){ }
+    MoodAnalyzer(){
+    }
 
     //PARAMETERISED CONSTRUCTOR
     MoodAnalyzer(String message){
@@ -11,13 +12,17 @@ public class MoodAnalyzer {
     }
 
     //DECLARE MAIN METHOD
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MoodAnalysisException {
         System.out.println("Welcome to Mood Analyzer");
     }
 
     //METHOD TO CHECK MOOD
-    public String moodAnalyzer() {
+    public String moodAnalyzer() throws MoodAnalysisException {
         try {
+            if (message.length()==0)
+            {
+                throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.EMPTY,"You entered empty, please enter valid mood");
+            }
             if (message.contains("sad"))
                 return "Sad";
             else
