@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class MoodAnalyzer {
     //DECLARE VARIABLE
     String message;
@@ -28,7 +30,7 @@ public class MoodAnalyzer {
             else
                 return "Happy";
         } catch (NullPointerException e) {
-            return "Happy";
+                throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.EMPTY,"You entered null, please enter valid mood");
         }
     }
 }
