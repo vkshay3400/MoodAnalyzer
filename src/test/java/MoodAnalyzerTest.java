@@ -50,8 +50,17 @@ public class MoodAnalyzerTest {
             MoodAnalyzer analyseMood = MoodAnalyserFactory.createMoodAnalyser();
             boolean reaction = analyseMood.equals(mood);
             Assert.assertEquals(true, reaction);
-            } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenMoodAnalyserClassName_WhenNotProper_ShouldThrowException_InMoodAnalyser() {
+        try {
+            MoodAnalyserFactory.getConstructor("MoodAnzer",String.class);
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS, e.type);
         }
     }
 }
