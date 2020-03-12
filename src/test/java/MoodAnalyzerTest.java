@@ -2,10 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class MoodAnalyzerTest {
-    //CREATE OBJECT OF MOOD ANALYZER CLASS
-    MoodAnalyzer mood = new MoodAnalyzer();
 
-    //TEST CASE TO CHECK SAD MOOD
     @Test
     public void givenMessage_whenValid_thenReturn() {
         MoodAnalyzer mood = new MoodAnalyzer("I am in sad mood");
@@ -16,7 +13,6 @@ public class MoodAnalyzerTest {
         }
     }
 
-    //TEST CASE TO CHECK HAPPY MOOD
     @Test
     public void givenMessage_whenInvalid_thenReturn() {
         MoodAnalyzer mood = new MoodAnalyzer("I am in happy mood");
@@ -27,7 +23,6 @@ public class MoodAnalyzerTest {
         }
     }
 
-    //TEST CASE FOR EXCEPTION HANDLING NULL MOOD
     @Test
     public void givenNullMoodShouldThrowException() {
         MoodAnalyzer mood = new MoodAnalyzer(null);
@@ -38,14 +33,25 @@ public class MoodAnalyzerTest {
         }
     }
 
-    //TEST CASE FOR EXCEPTION HANDLING EMPTY MOOD
     @Test
     public void givenEmptyMoodShouldThrowException() {
-        MoodAnalyzer mood = new MoodAnalyzer(null);
+        MoodAnalyzer mood = new MoodAnalyzer("");
         try {
             String reaction = mood.moodAnalyzer();
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.MyException_Type.EMPTY,e.type);
+        }
+    }
+
+    @Test
+    public void givenMoodAnalyserClassNameDefaultConstructor_Proper_ShouldReturnObject() {
+        MoodAnalyzer mood = new MoodAnalyzer();
+        try {
+            MoodAnalyzer analyseMood = MoodAnalyserFactory.createMoodAnalyser();
+            boolean reaction = analyseMood.equals(mood);
+            Assert.assertEquals(true, reaction);
+            } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
