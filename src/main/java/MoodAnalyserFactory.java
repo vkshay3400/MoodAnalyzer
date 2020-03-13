@@ -4,22 +4,23 @@ import java.lang.reflect.InvocationTargetException;
 public class MoodAnalyserFactory {
     public static Constructor<?> getConstructor(String className,Class param) throws MoodAnalysisException {
         try {
+            //RETURN CLASS OBJECT
             Class<?> moodAnalyserClass = Class.forName(className);
             return moodAnalyserClass.getConstructor(param);
-            } catch (ClassNotFoundException e) {
-                throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS, e.getMessage());
-            } catch (NoSuchMethodException e) {
-                throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD, e.getMessage());
-            }
+        } catch (ClassNotFoundException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS, e.getMessage());
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD, e.getMessage());
         }
+    }
 
     public static MoodAnalyzer createMoodAnalyser() {
         try {
-            //returns class object
+            //RETURN CLASS OBJECT
             Class<?> moodAnalyzerClass = Class.forName("MoodAnalyzer");
-            // returns the constructor object
+            // RETURN THE CONSTRUCTOR OBJECT
             Constructor<?> moodConstructor = moodAnalyzerClass.getConstructor();
-            //Constructor class is used to create a new instance of the class.
+            //CONSTRUCTOR CLASS IS USED TO CREATE A NEW INSTANCE OF THE CLASS
             Object instance = moodConstructor.newInstance();
             return (MoodAnalyzer) instance;
         } catch (ClassNotFoundException e) {
@@ -34,5 +35,5 @@ public class MoodAnalyserFactory {
             e.printStackTrace();
         }
             return null;
-        }
+    }
 }
