@@ -4,7 +4,7 @@ import org.junit.Test;
 public class MoodAnalyzerTest {
 
     @Test
-    public void givenMessage_whenValid_thenReturn() {
+    public void givenMessage_whenValid_thenReturnSad() {
         MoodAnalyzer mood = new MoodAnalyzer("I am in sad mood");
         try {
             String reaction = mood.moodAnalyzer();
@@ -14,7 +14,7 @@ public class MoodAnalyzerTest {
     }
 
     @Test
-    public void givenMessage_whenInvalid_thenReturn() {
+    public void givenMessage_whenInvalid_thenReturnHappy() {
         MoodAnalyzer mood = new MoodAnalyzer("I am in happy mood");
         try {
             String reaction = mood.moodAnalyzer();
@@ -82,6 +82,15 @@ public class MoodAnalyzerTest {
             Assert.assertEquals(true, reaction);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenMoodAnalyserClassName_WhenImProper_ShouldThrowException_InMoodAnalyser() {
+        try {
+            MoodAnalyserFactory.getConstructor("ModAnazer",String.class,"I am in happy mood");
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS, e.type);
         }
     }
 }
