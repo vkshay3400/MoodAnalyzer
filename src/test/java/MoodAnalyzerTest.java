@@ -86,11 +86,20 @@ public class MoodAnalyzerTest {
     }
 
     @Test
-    public void givenMoodAnalyserClassName_WhenImProper_ShouldThrowException_InMoodAnalyser() {
+    public void givenMoodAnalyserClassName_WhenImProperSuchClass_ShouldThrowException_InMoodAnalyser() {
         try {
             MoodAnalyserFactory.getConstructor("ModAnazer",String.class,"I am in happy mood");
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS, e.type);
+        }
+    }
+
+    @Test
+    public void givenMoodAnalyserClassName_WhenImProperSuchMethod_ShouldThrowException_InMoodAnalyser() {
+        try {
+            MoodAnalyserFactory.getConstructor("MoodAnalyzer",Integer.class,"I am in happy mood");
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD, e.type);
         }
     }
 }

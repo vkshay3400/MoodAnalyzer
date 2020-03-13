@@ -38,25 +38,6 @@ public class MoodAnalyserFactory {
         return null;
     }
 
-    public static Object getConstructor(String className,Class param,String reaction) throws MoodAnalysisException {
-        try {
-            //RETURN CLASS OBJECT
-            Class<?> moodAnalyserClass = Class.forName(className);
-            Constructor<?> moodConstructor = moodAnalyserClass.getConstructor(param);
-            //CONSTRUCTOR CLASS IS USED TO CREATE A NEW INSTANCE OF THE CLASS
-            return moodConstructor.newInstance(reaction);
-            } catch (ClassNotFoundException | NoSuchMethodException e) {
-            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS, e.getMessage());
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     // PARAMTERISED CONSTRUCTOR
     public static MoodAnalyzer createMoodAnalyser(String reaction) {
         try {
@@ -74,6 +55,28 @@ public class MoodAnalyserFactory {
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //TO CHECK NO CLASS, NO METHOD
+    public static Object getConstructor(String className,Class param,String reaction) throws MoodAnalysisException {
+        try {
+            //RETURN CLASS OBJECT
+            Class<?> moodAnalyserClass = Class.forName(className);
+            Constructor<?> moodConstructor = moodAnalyserClass.getConstructor(param);
+            //CONSTRUCTOR CLASS IS USED TO CREATE A NEW INSTANCE OF THE CLASS
+            return moodConstructor.newInstance(reaction);
+            }catch (ClassNotFoundException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS, e.getMessage());
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD, e.getMessage());
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
