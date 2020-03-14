@@ -1,4 +1,5 @@
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyserFactory {
@@ -91,6 +92,21 @@ public class MoodAnalyserFactory {
         } catch (NoSuchMethodException e) {
             throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD, "No such method found");
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //SET FIELD MOOD ANALYSER
+    public static String setFieldMoodAnalyser(MoodAnalyzer mood,String fieldName,String fieldValue) throws MoodAnalysisException {
+        try {
+            Field field = mood.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            field.set(mood,fieldValue);
+        }catch (NoSuchFieldException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_FIELD, "No such field found");
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
         return null;
