@@ -153,4 +153,14 @@ public class MoodAnalyzerTest {
             Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_FIELD, e.type);
         }
     }
+
+    @Test
+    public void setNullMessageField_WhenImproper_ShouldThrowMoodAnalysisException() {
+        try {
+            MoodAnalyzer moodAnalyser = MoodAnalyserFactory.createMoodAnalyser();
+            MoodAnalyserFactory.setFieldMoodAnalyser(moodAnalyser,"message",null);
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.MyException_Type.NULL_VALUE, e.type);
+        }
+    }
 }
