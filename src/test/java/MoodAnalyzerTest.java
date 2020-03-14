@@ -136,7 +136,19 @@ public class MoodAnalyzerTest {
             MoodAnalyzer moodAnalyser = MoodAnalyserFactory.createMoodAnalyser();
             MoodAnalyserFactory.setFieldMoodAnalyser(moodAnalyser,"message","I am in happy mood");
             String moodResult = MoodAnalyserFactory.invokeMoodAnalyser( moodAnalyser, "moodAnalyzer");
-            Assert.assertEquals("happy",moodResult);
+            Assert.assertEquals("Happy",moodResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void setField_WhenImproper_ShouldThrowException_WithNoSuchField() {
+        try {
+            MoodAnalyzer moodAnalyser = MoodAnalyserFactory.createMoodAnalyser();
+            MoodAnalyserFactory.setFieldMoodAnalyser(moodAnalyser,"wrongMessage","I am in happy mood");
+            String moodResult = MoodAnalyserFactory.invokeMoodAnalyser( moodAnalyser, "moodAnalyzer");
+            Assert.assertEquals("Happy",moodResult);
         } catch (MoodAnalysisException e) {
             Assert.assertEquals(MoodAnalysisException.MyException_Type.NO_SUCH_FIELD, e.type);
         }

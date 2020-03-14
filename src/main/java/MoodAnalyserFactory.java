@@ -9,9 +9,9 @@ public class MoodAnalyserFactory {
             Class<?> moodAnalyserClass = Class.forName(className);
             return moodAnalyserClass.getConstructor(param);
         } catch (ClassNotFoundException e) {
-            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS, e.getMessage());
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS, "No such a class found");
         } catch (NoSuchMethodException e) {
-            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD, e.getMessage());
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD, "No such a method found");
         }
     }
 
