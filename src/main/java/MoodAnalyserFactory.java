@@ -70,7 +70,7 @@ public class MoodAnalyserFactory {
             Constructor<?> moodConstructor = moodAnalyserClass.getConstructor(param);
             //CONSTRUCTOR CLASS IS USED TO CREATE A NEW INSTANCE OF THE CLASS
             return moodConstructor.newInstance(reaction);
-            }catch (ClassNotFoundException e) {
+        }catch (ClassNotFoundException e) {
             throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_CLASS, e.getMessage());
         } catch (NoSuchMethodException e) {
             throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD, e.getMessage());
@@ -79,6 +79,18 @@ public class MoodAnalyserFactory {
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //INVOKE METHOD AND RETURN OUTPUT
+    public static String invokeMoodAnalyser(MoodAnalyzer mood,String methodName) throws MoodAnalysisException {
+        try {
+            return (String) mood.getClass().getMethod(methodName).invoke(mood);
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.MyException_Type.NO_SUCH_METHOD, "No such method found");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
